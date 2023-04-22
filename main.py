@@ -29,3 +29,7 @@ async def bus_info(bus_route: int):
 @fastapi.get('/map')
 async def show_map():
     await display_map()
+
+@fastapi.get('/')
+async def root():
+    return "hello world"

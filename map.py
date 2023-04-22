@@ -29,7 +29,7 @@ async def display_map():
 
 
 def display_coordinates_on_map(coordinates, zoom=14):
-    G = ox.graph_from_point((coordinates[0]['latitude'], coordinates[0]['longitude']), dist=5000, dist_type='bbox',
+    G = ox.graph_from_point((coordinates[0]['latitude'], coordinates[0]['longitude']), dist=10000, dist_type='bbox',
                             network_type='all')
 
     fig, ax = ox.plot_graph(G, bgcolor='white', edge_color='black', node_size=0, show=False, close=False)
@@ -37,6 +37,6 @@ def display_coordinates_on_map(coordinates, zoom=14):
     for coord in coordinates:
         ax.scatter(coord['longitude'], coord['latitude'], c='red', s=50, zorder=3)
 
-    plt.savefig('map_with_coordinates.png', dpi=300, bbox_inches='tight')
+    plt.savefig('map_with_coordinates{timestamp}.png'.format(timestamp=time.time()), dpi=300, bbox_inches='tight')
 
     plt.show()
