@@ -1,7 +1,7 @@
-from redis import Redis
+#from redis import Redis
 from motor.motor_asyncio import AsyncIOMotorClient
 import asyncio
-r = Redis()
+# r = Redis(port=6379, decode_responses=True)
 client = AsyncIOMotorClient()
 industrialdb = client['industrialdb']
 mycol = industrialdb['mycol']

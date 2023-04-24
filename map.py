@@ -1,4 +1,4 @@
-from db import r, insert_coords, get_coords
+from db import insert_coords, get_coords
 import osmnx as ox
 import matplotlib.pyplot as plt
 import json
@@ -7,11 +7,11 @@ import time
 hash_list = []
 
 
-async def collect_coordinates(bus):
-    bus_data = r.hget(bus, 'coordinates')
-    bus_data_dict = json.loads(bus_data)
-    latitude = bus_data_dict['latitude']
-    longitude = bus_data_dict['longitude']
+async def collect_coordinates(latitude, longitude):
+    # bus_data = r.hget(bus, 'coordinates')
+    # bus_data_dict = json.loads(bus_data)
+    # latitude = bus_data_dict['latitude']
+    # longitude = bus_data_dict['longitude']
     timestamp = time.time()
 
     hashdata = hash(timestamp)
@@ -29,6 +29,7 @@ async def display_map():
 
 
 def display_coordinates_on_map(coordinates, zoom=14):
+    print(coordinates)
     G = ox.graph_from_point((coordinates[0]['latitude'], coordinates[0]['longitude']), dist=10000, dist_type='bbox',
                             network_type='all')
 

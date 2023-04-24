@@ -1,8 +1,7 @@
 import aiohttp
-import asyncio
 import json
 from fastapi import FastAPI
-from db import r
+
 from map import collect_coordinates, display_map
 
 fastapi = FastAPI()
@@ -19,12 +18,13 @@ async def bus_data(route_number):
 @fastapi.get('/bus/{bus_route}')
 async def bus_info(bus_route: int):
     bus_json = await bus_data(bus_route)
+    print(bus_json)
     for bus in bus_json:
         latitude = bus_json[bus]['latitude']
         longitude = bus_json[bus]['longitude']
         coordinates = {'latitude': latitude, 'longitude': longitude}
-        r.hset(bus, 'coordinates', json.dumps(coordinates))
-        await collect_coordinates(bus)
+        #r.hset(bus, 'coordinates', json.dumps(coordinates))
+        await collect_coordinates(latitude, longitude)
 
 @fastapi.get('/map')
 async def show_map():
