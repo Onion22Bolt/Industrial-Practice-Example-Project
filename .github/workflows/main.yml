@@ -1,0 +1,20 @@
+name: Local Build and Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image from Dockerfile
+      run: docker compose build -t myimage:latest .
+
+    - name: Deploy Docker image to local Docker
+      run: docker compose up -d 
