@@ -2,7 +2,7 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 import asyncio
 # r = Redis(port=6379, decode_responses=True)
-client = AsyncIOMotorClient()
+client = AsyncIOMotorClient('mongodb://industrial_practice-mongodb_container-1')
 industrialdb = client['industrialdb']
 mycol = industrialdb['mycol']
 
